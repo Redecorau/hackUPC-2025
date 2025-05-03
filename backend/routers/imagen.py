@@ -7,10 +7,10 @@ import httpx
 app = APIRouter(prefix="/producto")
 api_URL = "https://api.inditex.com/pubvsearch/products"
 
-OAUTH2_ACCESSTOKEN_URL = "https://auth.inditex.com:443/openam/oauth2/itxid/itxidmp/sandbox/access_token"  # Reemplaza con la URL real
+OAUTH2_ACCESSTOKEN_URL = "https://auth.inditex.com:443/openam/oauth2/itxid/itxidmp/access_token"  # Reemplaza con la URL real
 OPEN_PLATFORM_USER_AGENT = "OpenPlatform/1.0"
-OAUTH2_CLIENT = "oauth-mkpsbox-oauthgwvooleiosvxtsxtoasnbxpro"  # Reemplaza con tu cliente ID
-OAUTH2_SECRET = "TCi}UB8?Z*84pqKB}"  # Reemplaza con tu secreto
+OAUTH2_CLIENT = "oauth-mkplace-oauthiflfggzhfkybesztdqpropro"  # Reemplaza con tu cliente ID
+OAUTH2_SECRET = ".2fjB*w]/92ALNjT"  # Reemplaza con tu secreto
 
 #Clase para mapear los valores de lo dado
 class OAuth2TokenResponse(BaseModel):
@@ -29,7 +29,7 @@ async def get_resultados(image: Annotated[str, Query(max_length=2000)], page: in
     headers = {
         "User-Agent": "OpenPlatform/1.0",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJZMjZSVjltUFc3dkc0bWF4NU80bDBBd2NpSVE9IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoicERwcElBSFpRZW16OXJUOFZPb0pXdyIsInN1YiI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdWRpdFRyYWNraW5nSWQiOiI0NmExZGRmMi03ZDBlLTQzMWYtYmM1My05YjNjOWEwNDU4Y2YtNTcyOTUzMTk0IiwiY3VzdG9tIjp7ImNvbnN1bWVyT3JnSWQiOiJqaG9qYW5tYXJ0aW5lem1heXRhX2dtYWlsLmNvbSIsIm1hcmtldHBsYWNlQ29kZSI6Im9wZW4tZGV2ZWxvcGVyLXBvcnRhbCIsIm1hcmtldHBsYWNlQXBwTW9kZSI6Im9ubGluZSIsIm1hcmtldHBsYWNlQXBwSWQiOiI0MjQyNzU1MC0xNGY0LTRjMGQtODM0Ni02M2Y0NjlkNTcyOGEifSwiaXNzIjoiaHR0cHM6Ly9hdXRoLmluZGl0ZXguY29tOjQ0My9vcGVuYW0vb2F1dGgyL2l0eGlkL2l0eGlkbXAiLCJ0b2tlbk5hbWUiOiJpZF90b2tlbiIsInVzZXJJZCI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdWQiOiJvYXV0aC1ta3BsYWNlLW9hdXRoaWZsZmdnemhma3liZXN6dGRxcHJvcHJvIiwiaWRlbnRpdHlUeXBlIjoic2VydmljZSIsImF6cCI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdXRoX3RpbWUiOjE3NDYyNTI4NzksInNjb3BlIjoibWFya2V0IHRlY2hub2xvZ3kuY2F0YWxvZy5yZWFkIG9wZW5pZCIsInJlYWxtIjoiL2l0eGlkL2l0eGlkbXAiLCJ1c2VyVHlwZSI6ImV4dGVybmFsIiwiZXhwIjoxNzQ2MjU2NDc5LCJ0b2tlblR5cGUiOiJKV1RUb2tlbiIsImlhdCI6MTc0NjI1Mjg3OSwiYXV0aExldmVsIjoiMSJ9.duiPtWo9mtZ6j-SOoNlW8M_LE6BpWjiAXy9NkEWNS8L5dTI9t9-GBvBpqwlsdwkZgKXIWWnE3W0xTSQJ2XvetKTdymI9QXtuOSqy_5kr_IAjdax4Ck9RGIJCryzJW-cQnzaNE01z85roITWbuV-s_OHRp6S-aojE_MwYOCtXddmTLjKtax5aXLDs2-ZckL4Qb0m-pdnbI8pso1oi9Fo7g-9Tf8bOcIUtPo0Ygb-HEOF_1q7-iCG-VZuXiwqaYKZAlRlQLJAEzyAM3HQd15LBWRvUaPLq-n43hNAUO4ZGMZCU5MBp56IrUI_Oq3zaDfRsa3y7oUKELKf85qre8ucwoA"
+        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJZMjZSVjltUFc3dkc0bWF4NU80bDBBd2NpSVE9IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiZjZSRndOeHE0MEJCOVhZeENwemFLdyIsInN1YiI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdWRpdFRyYWNraW5nSWQiOiJjMTVlZTI2Yi04NGVjLTQxYmQtYjFmZS00MWIyMjVlODUwNDMtNTc1Mjg3MTgxIiwiY3VzdG9tIjp7ImNvbnN1bWVyT3JnSWQiOiJqaG9qYW5tYXJ0aW5lem1heXRhX2dtYWlsLmNvbSIsIm1hcmtldHBsYWNlQ29kZSI6Im9wZW4tZGV2ZWxvcGVyLXBvcnRhbCIsIm1hcmtldHBsYWNlQXBwTW9kZSI6Im9ubGluZSIsIm1hcmtldHBsYWNlQXBwSWQiOiI0MjQyNzU1MC0xNGY0LTRjMGQtODM0Ni02M2Y0NjlkNTcyOGEifSwiaXNzIjoiaHR0cHM6Ly9hdXRoLmluZGl0ZXguY29tOjQ0My9vcGVuYW0vb2F1dGgyL2l0eGlkL2l0eGlkbXAiLCJ0b2tlbk5hbWUiOiJpZF90b2tlbiIsInVzZXJJZCI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdWQiOiJvYXV0aC1ta3BsYWNlLW9hdXRoaWZsZmdnemhma3liZXN6dGRxcHJvcHJvIiwiaWRlbnRpdHlUeXBlIjoic2VydmljZSIsImF6cCI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdXRoX3RpbWUiOjE3NDYyNjY1MzYsInNjb3BlIjoibWFya2V0IHRlY2hub2xvZ3kuY2F0YWxvZy5yZWFkIG9wZW5pZCIsInJlYWxtIjoiL2l0eGlkL2l0eGlkbXAiLCJ1c2VyVHlwZSI6ImV4dGVybmFsIiwiZXhwIjoxNzQ2MjcwMTM2LCJ0b2tlblR5cGUiOiJKV1RUb2tlbiIsImlhdCI6MTc0NjI2NjUzNiwiYXV0aExldmVsIjoiMSJ9.EPBZzJzw3QikFNzamR9PYrtFFBO52aRxyNQ5SxwvytJBI_UF4x-yyOH6q6dNydtHDWAXTgztdpRKC-eb6wP7tazDugvEmHElKqpHlXScfrWnLkdNdDAFNnI_yrDdH89T6nqb0K1FH9rY0Vf9eZyY_Aa5A4z9mYG5uZZo2BKHaRRCjcdYB0csFTVcwg6obOhQA-7fTbGQI_Uqq-USH5wJC9jv3Ts_KQgYWRkvvDuCrVFTnlbjHni1IzDHYei_PTWf6oOf2MM69Sx0xClOtPisda4gFBlVhOitP_wkesp0czF06QZtyNna7PD0_IZDEP4B7nuB4rrKxkU1LIEFIT2tGw"
     }
     async with httpx.AsyncClient() as cliente:
         try:
@@ -46,17 +46,18 @@ async def get_resultados(image: Annotated[str, Query(max_length=2000)], page: in
 @app.post("/")
 async def obtener_token():
     headers = {
-        "User-Agent": OPEN_PLATFORM_USER_AGENT,
-        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": OPEN_PLATFORM_USER_AGENT
+        #"Content-Type": "application/x-www-form-urlencoded",
     }
     auth = httpx.BasicAuth(OAUTH2_CLIENT, OAUTH2_SECRET)
     data = urlencode({"grant_type": "client_credentials", "scope": "technology.catalog.read"})  # Ajusta los scopes según sea necesario
     async with httpx.AsyncClient() as client:
         try:
-            response = await client.post(OAUTH2_ACCESSTOKEN_URL, headers=headers, auth=auth, data=data)
+            print(f"{OAUTH2_ACCESSTOKEN_URL}, {headers}, {auth}, {data}")
+            response = await client.post(url=OAUTH2_ACCESSTOKEN_URL, headers=headers, auth=auth, data=data)
             response.raise_for_status()
             token_data = response.json()
-            return OAuth2TokenResponse(**token_data)
+            return token_data #OAuth2TokenResponse(**token_data)
         except httpx.RequestError as e:
             raise HTTPException(status_code=500, detail=f"Error al conectar con el servidor de autorización: {e}")
         except httpx.HTTPStatusError as e:
