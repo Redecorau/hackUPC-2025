@@ -62,7 +62,7 @@ export class CharacterServiceService {
    * @returns 
    * https://static.zara.net/assets/public/8abc/57f2/adcd4344b8ee/30d0c8f7033a/03920260400-p/03920260400-p.jpg
    */
-  getResultados(image:string= "https://static.zara.net/assets/public/8abc/57f2/adcd4344b8ee/30d0c8f7033a/03920260400-p/03920260400-p.jpg",page: number = 1, perPage:number=5):Observable<Producto[]> { //Funcion para hacer un get de los insanos
+  getResultados(image:string= "https://res.cloudinary.com/dzvkyrjah/image/upload/v1746293023/nzwpnc9lbpgcwexgyvtn.jpg",page: number = 1, perPage:number=5):Observable<Producto[]> { //Funcion para hacer un get de los insanos
     let params = new HttpParams()
       .set('image', image)
       .set('page', page)

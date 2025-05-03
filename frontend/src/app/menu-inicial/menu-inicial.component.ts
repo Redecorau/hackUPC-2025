@@ -1,16 +1,19 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ComunicacionService } from '../comunicacion.service';
 
 @Component({
   selector: 'app-menu-inicial',
-  standalone: true,
+  //standalone: true,
   imports: [CommonModule],
   templateUrl: './menu-inicial.component.html',
   styleUrls: ['./menu-inicial.component.css']
 })
-export class MenuInicialComponent implements OnInit {
 
+export class MenuInicialComponent implements OnInit {
+  comunicacionService= Inject(ComunicacionService)
   imagenUrl: string | null = null;
+
   getImagenUrl(){
     return this.imagenUrl
   }
@@ -20,7 +23,7 @@ export class MenuInicialComponent implements OnInit {
   ngOnInit() {
     const droparea = document.querySelector('.droparea') as HTMLElement;
     if (!droparea) return;
-
+    
     const active = () => droparea.classList.add('green-border');
     const inactive = () => droparea.classList.remove('green-border');
     const prevents = (e: Event) => e.preventDefault();
@@ -66,6 +69,7 @@ export class MenuInicialComponent implements OnInit {
         const url = await this.subirImagenACloudinary(archivo);
         if (url) {
           this.imagenUrl = url;
+          this.comunicacionService.actualizarVariable(url);
           console.log('Imagen cargada por botón:', this.imagenUrl);
         }
       }
@@ -89,6 +93,7 @@ export class MenuInicialComponent implements OnInit {
   
       if (data.secure_url) {
         console.log('Imagen subida a:', data.secure_url);
+        
         return data.secure_url;
       } else {
         console.error('Respuesta inesperada de Cloudinary:', data);
@@ -99,5 +104,6 @@ export class MenuInicialComponent implements OnInit {
       return null;
     }
   }
+  
   
 } 

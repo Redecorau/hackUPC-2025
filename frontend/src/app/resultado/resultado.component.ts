@@ -5,6 +5,7 @@ import { CharacterServiceService, Producto } from '../producto.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { MenuInicialComponent } from '../menu-inicial/menu-inicial.component';
+import { ComunicacionService } from '../comunicacion.service';
 @Component({
   selector: 'app-resultado',
   standalone: true,  
@@ -13,8 +14,17 @@ import { MenuInicialComponent } from '../menu-inicial/menu-inicial.component';
   styleUrls: ['./resultado.component.css']
 })
 export class ResultadoComponent {
+  url = ""
   productoService = inject(CharacterServiceService)
+  comunicacionService = inject(ComunicacionService)
   productos$: Observable<Producto[]> = this.productoService.getResultados();
+
+
+ngOnInit() {
+  this.comunicacionService.variable$.subscribe(msg => {
+    this.url = msg;
+  });
+}
   /**
    * 
   productos = [
