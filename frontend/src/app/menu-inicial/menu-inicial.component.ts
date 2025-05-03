@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
+import { ComunicacionService } from '../comunicacion.service';
 
 @Component({
   selector: 'app-menu-inicial',
-  //standalone: true,
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './menu-inicial.component.html',
   styleUrls: ['./menu-inicial.component.css']
 })
 
 export class MenuInicialComponent implements OnInit {
-  //comunicacionService= Inject(ComunicacionService)
+  comunicacionService= inject(ComunicacionService)
   imagenUrl: string | null = null;
 
   getImagenUrl(){
@@ -43,6 +44,7 @@ export class MenuInicialComponent implements OnInit {
         if (url) {
           this.imagenUrl = url;
           console.log('Imagen cargada por drop:', this.imagenUrl);
+          
           this.router.navigate(['/resultado'], { queryParams: { url: this.imagenUrl } });
         }
       }
@@ -72,8 +74,8 @@ export class MenuInicialComponent implements OnInit {
         const url = await this.subirImagenACloudinary(archivo);
         if (url) {
           this.imagenUrl = url;
-          //this.comunicacionService.actualizarVariable(url);
           console.log('Imagen cargada por botón:', this.imagenUrl);
+          this.comunicacionService.actualizarVariable(this.imagenUrl)
           this.router.navigate(['/Resultado'], { queryParams: { url: this.imagenUrl } });
         }
       }
