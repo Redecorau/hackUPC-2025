@@ -48,3 +48,32 @@
     font-size: 15px;
     color: #636363;
 }
+
+.visible {
+    opacity: 1;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.cargandotexto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+    text-align: center;
+    margin: 0;              
+}
+
+.puntos::after {
+    content: '';
+    animation: puntosAnim 3s steps(3, start) infinite;
+  }
+  
+  @keyframes puntosAnim {
+    0%        { content: '.'; }
+    40.33%    { content: '..'; }
+    88.66%    { content: '...'; }
+  }

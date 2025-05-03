@@ -1,11 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CharacterServiceService, Producto } from '../producto.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { switchMap, filter } from 'rxjs/operators';
-import { ComunicacionService } from '../comunicacion.service';
 
 @Component({
   selector: 'app-resultado',
@@ -14,16 +12,24 @@ import { ComunicacionService } from '../comunicacion.service';
   templateUrl: './resultado.component.html',
   styleUrls: ['./resultado.component.css']
 })
-export class ResultadoComponent implements OnInit {
-  private productoService = inject(CharacterServiceService);
-  private comunicacionService = inject(ComunicacionService);
+export class ResultadoComponent implements AfterViewInit {
+  productoService = inject(CharacterServiceService);
+  productos$: Observable<Producto[]> = this.productoService.getResultados();
 
-  productos$!: Observable<Producto[]>;
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      const cargando = document.querySelector('.visible') as HTMLElement;
+      const resultados = document.querySelector('.invisible') as HTMLElement;
 
-  ngOnInit() {
-    this.productos$ = this.comunicacionService.variable$.pipe(
-      filter((url) => !!url), // Ignora valores vacíos
-      switchMap((url) => this.productoService.getResultados(url))
-    );
+      if (cargando && resultados) {
+        cargando.classList.remove('visible');
+        cargando.classList.add('invisible');
+
+        resultados.classList.remove('invisible');
+        resultados.classList.add('visible');
+      } else {
+        console.warn('No se encontraron los elementos .visible o .invisible');
+      }
+    }, 4000);
   }
 }
