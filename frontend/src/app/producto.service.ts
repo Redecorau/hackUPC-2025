@@ -54,6 +54,14 @@ export interface Producto{
 export class CharacterServiceService {
   private apiURL = 'http://127.0.0.1:8000/producto';
   private http = inject(HttpClient);
+  /**
+   * 
+   * @param image 
+   * @param page 
+   * @param perPage 
+   * @returns 
+   * https://static.zara.net/assets/public/8abc/57f2/adcd4344b8ee/30d0c8f7033a/03920260400-p/03920260400-p.jpg
+   */
   getResultados(image:string= "https://static.zara.net/assets/public/8abc/57f2/adcd4344b8ee/30d0c8f7033a/03920260400-p/03920260400-p.jpg",page: number = 1, perPage:number=5):Observable<Producto[]> { //Funcion para hacer un get de los insanos
     let params = new HttpParams()
       .set('image', image)

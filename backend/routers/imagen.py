@@ -2,7 +2,9 @@ from fastapi import APIRouter, HTTPException, Query
 from typing import Annotated
 from urllib.parse import quote, urlencode
 from pydantic import BaseModel
+from fastapi.responses import JSONResponse
 import httpx
+import base64
 
 app = APIRouter(prefix="/producto")
 api_URL = "https://api.inditex.com/pubvsearch/products"
@@ -48,29 +50,32 @@ async def get_resultados(image: Annotated[str, Query(max_length=2000)], page: in
             raise HTTPException(status_code=e.response.status_code, detail=f"Error de la API externa: {e.response.text}")
 
 #Quiero hacer que esta funcion crea un nuevo token para el usuario
-@app.post("/")
-async def obtener_token():
-    headers = {
-        "User-Agent": OPEN_PLATFORM_USER_AGENT
-        #"Content-Type": "application/x-www-form-urlencoded",
-    }
-    auth = httpx.BasicAuth(OAUTH2_CLIENT, OAUTH2_SECRET)
-    data = urlencode({"grant_type": "client_credentials", "scope": "technology.catalog.read"})  # Ajusta los scopes según sea necesario
-    async with httpx.AsyncClient() as client:
-        try:
-            print(f"{OAUTH2_ACCESSTOKEN_URL}, {headers}, {auth}, {data}")
-            response = await client.post(url=OAUTH2_ACCESSTOKEN_URL, headers=headers, auth=auth, data=data)
-            response.raise_for_status()
-            token_data = response.json()
-            return token_data #OAuth2TokenResponse(**token_data)
-        except httpx.RequestError as e:
-            raise HTTPException(status_code=500, detail=f"Error al conectar con el servidor de autorización: {e}")
-        except httpx.HTTPStatusError as e:
-            raise HTTPException(status_code=e.response.status_code, detail=f"Error del servidor de autorización: {e.response.text}")
-        except ValueError:
-            raise HTTPException(status_code=500, detail="Error al decodificar la respuesta del servidor de autorización")
+OAUTH2_CLIENT = "oauth-mkplace-oauthiflfggzhfkybesztdqpropro"
+OAUTH2_SECRET = ".2fjB*w]/92ALNjT"
+OAUTH2_ACCESSTOKEN_URL = "https://auth.inditex.com:443/openam/oauth2/itxid/itxidmp/access_token"
+SCOPES = "technology.catalog.read"
 
-    pass
+@app.post("/get-token")
+async def get_token():
+    print("algo")
+    auth = f"{OAUTH2_CLIENT}:{OAUTH2_SECRET}"
+    headers = {
+        "Authorization": f"Basic {base64.b64encode(auth.encode()).decode()}",
+        "User-Agent": "OpenPlatform/1.0",
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+    data = {
+        "grant_type": "client_credentials",
+        "scope": SCOPES
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(OAUTH2_ACCESSTOKEN_URL, headers=headers, data=data)
+
+    if response.status_code != 200:
+        raise HTTPException(status_code=response.status_code, detail=response.text)
+
+    return JSONResponse(content=response.json())
 """
 EJEMPLO DE COMO SE HACE COMUNMENTE LAS PETICIONES POR QUERY
 http://127.0.0.1:8000/items/?skip=0&limit=10

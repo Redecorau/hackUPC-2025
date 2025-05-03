@@ -11,6 +11,9 @@ import { CommonModule } from '@angular/common';
 export class MenuInicialComponent implements OnInit {
   
   imagenUrl: string | null = null;
+  getImagenUrl(){
+    return this.imagenUrl
+  }
 
   @ViewChild('inputArchivo') inputArchivo!: ElementRef<HTMLInputElement>;
 
@@ -58,6 +61,7 @@ export class MenuInicialComponent implements OnInit {
       const archivo = input.files[0];
       if (archivo.type.startsWith('image/')) {
         this.imagenUrl = URL.createObjectURL(archivo);
+        
         console.log('Imagen cargada por botón:', this.imagenUrl);
       }
     }
