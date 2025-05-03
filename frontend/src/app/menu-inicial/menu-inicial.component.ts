@@ -12,6 +12,9 @@ import { RouterLink, Router } from '@angular/router';
 export class MenuInicialComponent implements OnInit {
 
   imagenUrl: string | null = null;
+  getImagenUrl(){
+    return this.imagenUrl
+  }
 
   @ViewChild('inputArchivo') inputArchivo!: ElementRef<HTMLInputElement>;
 

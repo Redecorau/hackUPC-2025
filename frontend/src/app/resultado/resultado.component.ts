@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { CharacterServiceService, Producto } from '../producto.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
+import { MenuInicialComponent } from '../menu-inicial/menu-inicial.component';
 @Component({
   selector: 'app-resultado',
   standalone: true,  
