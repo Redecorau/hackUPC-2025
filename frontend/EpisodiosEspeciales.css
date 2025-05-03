@@ -1,0 +1,153 @@
+/* Selector de temporadas */
+.ordenado {
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.selectortemp {
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    max-width: 300px;
+    height: 150px;
+}
+
+.selectortemp:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Bloque de episodios 1, 2 y 3 */ 
+.botones {
+    margin: 0 auto;
+    text-align: center; 
+}
+
+.posicionEpisodios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding-left: 100px;
+}
+
+.enlaceEpisodio {
+    text-decoration: none;       
+    display: inline-block;  
+}
+
+/* Caja de episodios 1, 2 y 3 */
+.botonbonito {
+    background-color: #1c1c1c;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.botonbonito:hover {
+    background-color: #2e2e2e;
+}
+
+.cajaEpisodios {
+    flex: 1 1 250px; 
+    max-width: 300px; 
+    background-color: #1c1c1c;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    padding: 10px;
+    height: 291px;
+}
+
+.cajaEpisodios:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.imagenEpisodio {
+    width: 100%; 
+    max-width: 100%; 
+}
+
+.letratitulo {
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+.tamanyoletra {
+    margin-top: 0px;
+    font-size: 14px; 
+    color: #DBDCDE;
+} 
+
+/* Cinta de capturas */
+.cinta {
+    display: flex;
+    width: 200%;
+    animation: mover 130s linear infinite;
+}
+
+@keyframes mover {
+    0% {
+      transform: translateX(100vw); 
+    }
+    1% {
+      transform: translateX(300px); 
+    }
+    100% {
+      transform: translateX(-200%); 
+    }
+}
+
+.fotoriel {
+    height: 200px;
+}
+
+/* Descripcion temporada */
+.titulogeneral{
+    font-size: 40px;
+    margin-left: 100px;
+    text-align: justify;
+    margin-right: 80px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.letrageneral {
+    font-size: 25px;
+    margin-left: 100px;
+    text-align: justify;
+    margin-right: 80px;
+    font-family: "Handlee", cursive;
+}
+
+/* Barra de abajo */
+#barraabajo {
+    background-color: black;
+    height: 80px;
+    overflow: hidden;
+}
+
+.letraabajo {
+    color: white;
+    text-align: center;
+    margin: 13px 50px 0 50px;
+}
+
+/* Cosas generales */
+body {
+    background-color: #F4FCFF;
+}
+
+body {
+    overflow-x: hidden;
+} 

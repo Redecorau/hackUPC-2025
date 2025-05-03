@@ -1,46 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-resultado',
-  standalone: true,  
-  imports: [CommonModule, RouterLink], 
+  standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './resultado.component.html',
   styleUrls: ['./resultado.component.css']
 })
-export class ResultadoComponent {
-  productos = [
-    {
-      id: '423786713',
-      name: 'PLAIN KNIT SWEATER',
-      price: {
-        currency: 'EUR',
-        value: {
-          current: 25.95,
-          original: null
-        }
-      },
-      link: 'https://zara.com/es/en/-P06216001.html',
-      brand: 'zara'
-    },
-    {
-      id: '434248505',
-      name: 'COLLAR POLO CARDIGAN',
-      price: {
-        currency: 'EUR',
-        value: {
-          current: 27.95,
-          original: null
-        }
-      },
-      link: 'https://zara.com/es/en/-P03920260.html',
-      brand: 'zara'
-    }
-  ];
+export class ResultadoComponent implements OnInit {
+  imagenUrl: string | null = null;
 
-  getImageUrl(productId: string): string {
-    return `https://static.zara.net/photos/${productId}/image.jpg`; // Ejemplo base, ajusta al patrón real
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    const zaraUrl = 'https://www.zara.com/es/en/plain-knit-sweater-p06216001.html';
+    
+    this.http.get(zaraUrl, { responseType: 'text' }).subscribe({
+      next: html => {
+        const imgRegex = /<img[^>]*class="[^"]*media-image__image media__wrapper--media[^"]*"[^>]*src="([^"]+)"[^>]*>/i;
+        const match = html.match(imgRegex);
+        if (match && match[1]) {
+          this.imagenUrl = match[1];
+        }
+      },
+      error: err => {
+        console.error('Error fetching Zara page:', err);
+      }
+    });
   }
-
 }

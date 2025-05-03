@@ -1,54 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-menu-inicial',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './menu-inicial.component.html',
-  styleUrls: ['./menu-inicial.component.css']  // Fixed typo: styleUrl → styleUrls
+  styleUrls: ['./menu-inicial.component.css']
 })
 export class MenuInicialComponent implements OnInit {
+  
+  imagenUrl: string | null = null;
+
+  @ViewChild('inputArchivo') inputArchivo!: ElementRef<HTMLInputElement>;
 
   ngOnInit() {
     const droparea = document.querySelector('.droparea') as HTMLElement;
-    if (!droparea) {
-      console.warn('Drop area not found.');
-      return;
-    }
+    if (!droparea) return;
 
     const active = () => droparea.classList.add('green-border');
     const inactive = () => droparea.classList.remove('green-border');
     const prevents = (e: Event) => e.preventDefault();
+
     const handleDrop = (e: DragEvent) => {
-      e.preventDefault();  // Prevent default behavior
+      e.preventDefault();
       const dt = e.dataTransfer;
       if (!dt) return;
+
       const files = dt.files;
       const fileArray = Array.from(files);
-      console.log(files); // FileList
-      console.log(fileArray);
+
+      if (fileArray.length > 0 && fileArray[0].type.startsWith('image/')) {
+        this.imagenUrl = URL.createObjectURL(fileArray[0]);
+        console.log('Imagen cargada por drop:', this.imagenUrl);
+      }
     };
 
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(evtName =>
-      droparea.addEventListener(evtName, prevents)
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(evt =>
+      droparea.addEventListener(evt, prevents)
     );
-
-    ['dragenter', 'dragover'].forEach(evtName =>
-      droparea.addEventListener(evtName, active)
+    ['dragenter', 'dragover'].forEach(evt =>
+      droparea.addEventListener(evt, active)
     );
-
-    ['dragleave', 'drop'].forEach(evtName =>
-      droparea.addEventListener(evtName, inactive)
+    ['dragleave', 'drop'].forEach(evt =>
+      droparea.addEventListener(evt, inactive)
     );
-
     droparea.addEventListener('drop', handleDrop);
-
-    window.addEventListener('dragover', function(e) {
-      e.preventDefault();
-    });
-    
-    window.addEventListener('drop', function(e) {
-      e.preventDefault();
-    });
   }
 
-  
+  abrirSelector(input: HTMLInputElement) {
+    input.click();
+  }
+
+  archivoSeleccionado(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const archivo = input.files[0];
+      if (archivo.type.startsWith('image/')) {
+        this.imagenUrl = URL.createObjectURL(archivo);
+        console.log('Imagen cargada por botón:', this.imagenUrl);
+      }
+    }
+  }
 }
