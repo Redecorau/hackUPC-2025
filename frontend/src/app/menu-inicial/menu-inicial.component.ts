@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class MenuInicialComponent {
 
+  ngOnInit() {
+    document.body.style.backgroundColor = '#F4FCFF'; 
+  }
+
 }

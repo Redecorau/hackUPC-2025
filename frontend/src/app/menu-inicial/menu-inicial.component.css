@@ -1,8 +1,99 @@
 .DivBarra {
-    background-color: red;
-    height: 60px;   
+    background-color: #DBDBDB;
+    height: 90px;   
     width: 100vw;   
     position: fixed;  
     top: 0;
     left: 0;
+    display: flex;             
+    align-items: center;      
 }
+
+.ImagenBarra {
+    margin-left: 30px;
+    cursor: pointer;
+    height: 55px;
+}
+
+.DebajoBarra {
+    margin-top: 100px;
+}
+
+.ContenedorTitulo {
+  text-align: center;
+}
+
+.LetraTitulo {
+    font-family: "Cal Sans", sans-serif;
+    font-size: 40px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+  
+.PrimeraLinea {
+    width: 650px;
+    margin: 3px auto;
+}
+
+.TextoDesc {
+    margin-left: 140px;
+    margin-right: 140px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    font-size: 20px;
+}
+
+.cinta {
+    display: flex;
+    width: 200%;
+    animation: mover 130s linear infinite;
+}
+
+@keyframes mover {
+    0% {
+      transform: translateX(100vw); 
+    }
+    1% {
+      transform: translateX(300px); 
+    }
+    100% {
+      transform: translateX(-200%); 
+    }
+}
+
+.fotoriel {
+    height: 150px;
+}
+
+.SegundaLinea {
+    height: 5px;              
+    background-color: black;    
+    border: none;             
+    width: 10%;
+    border-radius: 30px;
+}
+
+
+
+.droparea {
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 384px;
+    max-width: 100%;
+    height: 160px;
+    border: 4px dashed grey;
+    border-radius: 15px;
+  }
+  
+  .droparea i {
+    font-size: 3rem;
+    flex-grow: 1;
+    padding-top: 1rem;
+  }
+  
+  .green-border {
+    border-color: green;
+  }
