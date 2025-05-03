@@ -3,7 +3,7 @@ from bson import ObjectId
 from routers.imagen import app as router_imagen
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
-"""
+
 
 origins = [
     "http://localhost:3000",  # Ejemplo para un frontend en React
@@ -18,5 +18,5 @@ app.add_middleware(
     allow_methods=["*"],  # Permite todos los métodos HTTP (GET, POST, PUT, DELETE, OPTIONS)
     allow_headers=["*"],  # Permite todos los encabezados HTTP
 )
-"""
+
 app.include_router(router_imagen)
