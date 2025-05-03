@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./menu-inicial.component.css']
 })
 export class MenuInicialComponent implements OnInit {
-  
+
   imagenUrl: string | null = null;
 
   @ViewChild('inputArchivo') inputArchivo!: ElementRef<HTMLInputElement>;
@@ -22,7 +22,7 @@ export class MenuInicialComponent implements OnInit {
     const inactive = () => droparea.classList.remove('green-border');
     const prevents = (e: Event) => e.preventDefault();
 
-    const handleDrop = (e: DragEvent) => {
+    const handleDrop = async (e: DragEvent) => {
       e.preventDefault();
       const dt = e.dataTransfer;
       if (!dt) return;
@@ -31,8 +31,11 @@ export class MenuInicialComponent implements OnInit {
       const fileArray = Array.from(files);
 
       if (fileArray.length > 0 && fileArray[0].type.startsWith('image/')) {
-        this.imagenUrl = URL.createObjectURL(fileArray[0]);
-        console.log('Imagen cargada por drop:', this.imagenUrl);
+        const url = await this.subirImagenACloudinary(fileArray[0]);
+        if (url) {
+          this.imagenUrl = url;
+          console.log('Imagen cargada por drop:', this.imagenUrl);
+        }
       }
     };
 
@@ -52,14 +55,46 @@ export class MenuInicialComponent implements OnInit {
     input.click();
   }
 
-  archivoSeleccionado(event: Event) {
+  async archivoSeleccionado(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const archivo = input.files[0];
       if (archivo.type.startsWith('image/')) {
-        this.imagenUrl = URL.createObjectURL(archivo);
-        console.log('Imagen cargada por botón:', this.imagenUrl);
+        const url = await this.subirImagenACloudinary(archivo);
+        if (url) {
+          this.imagenUrl = url;
+          console.log('Imagen cargada por botón:', this.imagenUrl);
+        }
       }
     }
   }
-}
+
+  async subirImagenACloudinary(archivo: File): Promise<string | null> {
+    const url = 'https://api.cloudinary.com/v1_1/dzvkyrjah/image/upload';
+    const formData = new FormData();
+  
+    formData.append('file', archivo);
+    formData.append('upload_preset', 'HackUpc2025'); // tu preset Unsigned
+  
+    try {
+      const respuesta = await fetch(url, {
+        method: 'POST',
+        body: formData
+      });
+  
+      const data = await respuesta.json();
+  
+      if (data.secure_url) {
+        console.log('Imagen subida a:', data.secure_url);
+        return data.secure_url;
+      } else {
+        console.error('Respuesta inesperada de Cloudinary:', data);
+        return null;
+      }
+    } catch (error) {
+      console.error('Error al subir imagen:', error);
+      return null;
+    }
+  }
+  
+} 
