@@ -1,0 +1,49 @@
+.DivBarra {
+    background-color: #DBDBDB;
+    height: 90px;   
+    width: 100vw;   
+    position: fixed;  
+    top: 0;
+    left: 0;
+    display: flex;             
+    align-items: center;      
+}
+
+.ImagenBarra {
+    margin-left: 30px;
+    cursor: pointer;
+    height: 55px;
+}
+
+.DebajoBarra {
+    margin-top: 100px;
+}
+
+.contenedoreS {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.contenedor {
+    text-align: center;
+    background-color: #DBDBDB;
+    padding: 10px;
+}
+
+.Titulo {
+    font-size: 20px;
+    font-family: "Cal Sans", sans-serif;
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 200px;
+    overflow: hidden;
+    text-align: center;    
+    margin: 0 auto;  
+}
+
+.Subtitulo {
+    margin-top: 2px;
+    font-size: 15px;
+    color: #636363;
+}

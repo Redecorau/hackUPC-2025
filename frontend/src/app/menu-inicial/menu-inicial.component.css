@@ -16,7 +16,7 @@
 }
 
 .DebajoBarra {
-    margin-top: 100px;
+    margin-top: 110px;
 }
 
 .ContenedorTitulo {
@@ -33,6 +33,7 @@
 .PrimeraLinea {
     width: 650px;
     margin: 3px auto;
+    margin-top: 0px;
 }
 
 .TextoDesc {
@@ -46,7 +47,7 @@
 .cinta {
     display: flex;
     width: 200%;
-    animation: mover 130s linear infinite;
+    animation: mover 110s linear infinite;
 }
 
 @keyframes mover {
@@ -86,14 +87,31 @@
     height: 160px;
     border: 4px dashed grey;
     border-radius: 15px;
-  }
+}
+
+.textoArrastrado {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
   
-  .droparea i {
+.droparea i {
     font-size: 3rem;
     flex-grow: 1;
     padding-top: 1rem;
-  }
-  
-  .green-border {
+}
+
+.imagendroperea {
+  height: 70px;
+  margin-bottom: 0px;
+}
+
+.letradroperea {
+  font-size: 22px;
+  text-align: center;
+}
+
+.green-border {
     border-color: green;
-  }
+}

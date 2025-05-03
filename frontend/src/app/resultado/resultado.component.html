@@ -1,0 +1,24 @@
+<div class="DivBarra">
+    <img class="ImagenBarra" src="https://2024.es.pycon.org/static/images/sponsors_logo/salvora/logo-inditex-tech.png?h=38f450e7">
+  </div>
+  
+  <div class="DebajoBarra">
+    <p>Coincidencias encontradas:</p><br>
+
+    <div class="contenedoreS">
+      <div class="contenedor" *ngFor="let producto of productos">
+        <p class="Titulo">{{ producto.name }}</p>
+        <p class="Subtitulo">({{ producto.brand | titlecase }})</p>
+        <p>{{ producto.price.value.current | number:'1.2-2' }}€</p>
+        <a [href]="producto.link" target="_blank">
+          <button>Página de compra</button>
+        </a>
+      </div>
+
+    </div>
+
+    <p>sexo</p>
+    <p *ngFor="let producto of productos">
+      {{ producto.id }}
+    </p>
+  </div>
