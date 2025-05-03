@@ -48,7 +48,7 @@
 .cinta {
     display: flex;
     width: 200%;
-    animation: mover 110s linear infinite;
+    animation: mover 85s linear infinite;
 }
 
 @keyframes mover {
