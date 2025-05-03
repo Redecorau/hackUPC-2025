@@ -1,11 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CharacterServiceService, Producto } from '../producto.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { MenuInicialComponent } from '../menu-inicial/menu-inicial.component';
-import { ComunicacionService } from '../comunicacion.service';
+
 @Component({
   selector: 'app-resultado',
   standalone: true,  
@@ -13,47 +12,24 @@ import { ComunicacionService } from '../comunicacion.service';
   templateUrl: './resultado.component.html',
   styleUrls: ['./resultado.component.css']
 })
-export class ResultadoComponent {
-  url = ""
-  productoService = inject(CharacterServiceService)
-  comunicacionService = inject(ComunicacionService)
+export class ResultadoComponent implements AfterViewInit {
+  productoService = inject(CharacterServiceService);
   productos$: Observable<Producto[]> = this.productoService.getResultados();
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      const cargando = document.querySelector('.visible') as HTMLElement;
+      const resultados = document.querySelector('.invisible') as HTMLElement;
 
-ngOnInit() {
-  this.comunicacionService.variable$.subscribe(msg => {
-    this.url = msg;
-  });
-}
-  /**
-   * 
-  productos = [
-    {
-      id: '423786713',
-      name: 'PLAIN KNIT SWEATER',
-      price: {
-        currency: 'EUR',
-        value: {
-          current: 25.95,
-          original: null
-        }
-      },
-      link: 'https://zara.com/es/en/-P06216001.html',
-      brand: 'zara'
-    },
-    {
-      id: '434248505',
-      name: 'COLLAR POLO CARDIGAN',
-      price: {
-        currency: 'EUR',
-        value: {
-          current: 27.95,
-          original: null
-        }
-      },
-      link: 'https://zara.com/es/en/-P03920260.html',
-      brand: 'zara'
-    }
-  ];
-   */
+      if (cargando && resultados) {
+        cargando.classList.remove('visible');
+        cargando.classList.add('invisible');
+
+        resultados.classList.remove('invisible');
+        resultados.classList.add('visible');
+      } else {
+        console.warn('No se encontraron los elementos .visible o .invisible');
+      }
+    }, 4000);
+  }
 }
