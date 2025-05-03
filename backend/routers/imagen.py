@@ -33,20 +33,10 @@ class OAuth2TokenResponse(BaseModel):
 async def get_resultados(image: Annotated[str, Query(max_length=2000)], page: int = 1 , perPage: int = 5 ): #Esta webada la tengo que hacer por query 
     image = quote(image) #Se codifica la url especificada 
     request_url = f"{api_URL}?image={image}&page={page}&perPage={perPage}"
-    async with httpx.AsyncClient() as cliente:
-        try:
-            respuesta = await cliente.post(url="http://127.0.0.1:8000/producto/get_token" )
-            respuesta.raise_for_status()
-            data = respuesta.json()
-            token = data["id_token"]
-        except httpx.RequestError as e:
-            raise HTTPException(status_code=500, detail=f"Error de conexión con la API externa: {e}")
-        except httpx.HTTPStatusError as e:
-            raise HTTPException(status_code=e.response.status_code, detail=f"Error de la API externa: {e.response.text}")
     headers = {
         "User-Agent": "OpenPlatform/1.0",
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {token}"
+        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJZMjZSVjltUFc3dkc0bWF4NU80bDBBd2NpSVE9IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiNEFROGhJVGRQZHB6c21weWdQTzh2USIsInN1YiI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdWRpdFRyYWNraW5nSWQiOiI0NmExZGRmMi03ZDBlLTQzMWYtYmM1My05YjNjOWEwNDU4Y2YtNTc5ODgxOTQzIiwiY3VzdG9tIjp7ImNvbnN1bWVyT3JnSWQiOiJqaG9qYW5tYXJ0aW5lem1heXRhX2dtYWlsLmNvbSIsIm1hcmtldHBsYWNlQ29kZSI6Im9wZW4tZGV2ZWxvcGVyLXBvcnRhbCIsIm1hcmtldHBsYWNlQXBwTW9kZSI6Im9ubGluZSIsIm1hcmtldHBsYWNlQXBwSWQiOiI0MjQyNzU1MC0xNGY0LTRjMGQtODM0Ni02M2Y0NjlkNTcyOGEifSwiaXNzIjoiaHR0cHM6Ly9hdXRoLmluZGl0ZXguY29tOjQ0My9vcGVuYW0vb2F1dGgyL2l0eGlkL2l0eGlkbXAiLCJ0b2tlbk5hbWUiOiJpZF90b2tlbiIsInVzZXJJZCI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdWQiOiJvYXV0aC1ta3BsYWNlLW9hdXRoaWZsZmdnemhma3liZXN6dGRxcHJvcHJvIiwiaWRlbnRpdHlUeXBlIjoic2VydmljZSIsImF6cCI6Im9hdXRoLW1rcGxhY2Utb2F1dGhpZmxmZ2d6aGZreWJlc3p0ZHFwcm9wcm8iLCJhdXRoX3RpbWUiOjE3NDYzMDk0NDAsInNjb3BlIjoibWFya2V0IHRlY2hub2xvZ3kuY2F0YWxvZy5yZWFkIG9wZW5pZCIsInJlYWxtIjoiL2l0eGlkL2l0eGlkbXAiLCJ1c2VyVHlwZSI6ImV4dGVybmFsIiwiZXhwIjoxNzQ2MzEzMDQwLCJ0b2tlblR5cGUiOiJKV1RUb2tlbiIsImlhdCI6MTc0NjMwOTQ0MCwiYXV0aExldmVsIjoiMSJ9.Ik7fEcy258dWYBv3pdJF2CXL7-z4Hgzs_tvJ7M_BU444UUPjhc-Dz6xnHP2Sh5QaGDTdvy2PcDxMKYyI9HSbyRkgpIZTaQbroyAWqAo308vwjBhAHTGy3kMUfagFzn3iAdkW2SXxOW4TtrQwoK8i0MODnbWsCYS8AWikiL4EismxL01qJXJULK1Dmf29QhZkXnOsE_0RZVWAEcS-UjDL5nTIvmkJe3O6nxMazJ-U25uAA7XsTYhV3NnADvI3GiriY_Bq7fYAUlAmQ3Qml2jwpqVF7a3TiMOxPQGixTjMZXfznzUOpOXUig7DhOQFXmDXQvRIHvyzr6n4tPtZxdG73g"
     }
     async with httpx.AsyncClient() as cliente:
         try:
@@ -65,7 +55,7 @@ OAUTH2_SECRET = ".2fjB*w]/92ALNjT"
 OAUTH2_ACCESSTOKEN_URL = "https://auth.inditex.com:443/openam/oauth2/itxid/itxidmp/access_token"
 SCOPES = "technology.catalog.read"
 
-@app.post("/get_token")
+@app.post("/get-token")
 async def get_token():
     print("algo")
     auth = f"{OAUTH2_CLIENT}:{OAUTH2_SECRET}"
