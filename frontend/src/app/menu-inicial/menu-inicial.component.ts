@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComunicacionService } from '../comunicacion.service';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-inicial',
@@ -11,7 +11,7 @@ import { ComunicacionService } from '../comunicacion.service';
 })
 
 export class MenuInicialComponent implements OnInit {
-  comunicacionService= Inject(ComunicacionService)
+  //comunicacionService= Inject(ComunicacionService)
   imagenUrl: string | null = null;
 
   getImagenUrl(){
@@ -19,6 +19,8 @@ export class MenuInicialComponent implements OnInit {
   }
 
   @ViewChild('inputArchivo') inputArchivo!: ElementRef<HTMLInputElement>;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     const droparea = document.querySelector('.droparea') as HTMLElement;
@@ -41,6 +43,7 @@ export class MenuInicialComponent implements OnInit {
         if (url) {
           this.imagenUrl = url;
           console.log('Imagen cargada por drop:', this.imagenUrl);
+          this.router.navigate(['/resultado'], { queryParams: { url: this.imagenUrl } });
         }
       }
     };
@@ -69,8 +72,9 @@ export class MenuInicialComponent implements OnInit {
         const url = await this.subirImagenACloudinary(archivo);
         if (url) {
           this.imagenUrl = url;
-          this.comunicacionService.actualizarVariable(url);
+          //this.comunicacionService.actualizarVariable(url);
           console.log('Imagen cargada por botón:', this.imagenUrl);
+          this.router.navigate(['/Resultado'], { queryParams: { url: this.imagenUrl } });
         }
       }
     }
@@ -104,6 +108,4 @@ export class MenuInicialComponent implements OnInit {
       return null;
     }
   }
-  
-  
-} 
+}
