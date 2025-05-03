@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-inicial',
@@ -13,6 +14,8 @@ export class MenuInicialComponent implements OnInit {
   imagenUrl: string | null = null;
 
   @ViewChild('inputArchivo') inputArchivo!: ElementRef<HTMLInputElement>;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     const droparea = document.querySelector('.droparea') as HTMLElement;
@@ -35,6 +38,7 @@ export class MenuInicialComponent implements OnInit {
         if (url) {
           this.imagenUrl = url;
           console.log('Imagen cargada por drop:', this.imagenUrl);
+          this.router.navigate(['/resultado'], { queryParams: { url: this.imagenUrl } });
         }
       }
     };
@@ -64,6 +68,7 @@ export class MenuInicialComponent implements OnInit {
         if (url) {
           this.imagenUrl = url;
           console.log('Imagen cargada por botón:', this.imagenUrl);
+          this.router.navigate(['/Resultado'], { queryParams: { url: this.imagenUrl } });
         }
       }
     }
@@ -96,5 +101,4 @@ export class MenuInicialComponent implements OnInit {
       return null;
     }
   }
-  
-} 
+}
