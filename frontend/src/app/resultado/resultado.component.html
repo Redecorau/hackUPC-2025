@@ -5,6 +5,7 @@
   <div class="DebajoBarra">
     <p>Coincidencias encontradas:</p><br>
 
+
     <div class="contenedoreS">
       @let productos = productos$ | async;
       @for (producto of productos; track producto.id){
@@ -21,11 +22,11 @@
           
         </div>
       }
-
     </div>
+    
+    <ng-template #loading>
+      <p>Cargando imagen...</p>
+    </ng-template>
+    
 
-    <p>sexo</p>
-    <p *ngFor="let producto of productos">
-      {{ producto.id }}
-    </p>
-  </div>
+

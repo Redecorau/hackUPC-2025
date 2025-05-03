@@ -6,7 +6,7 @@
   
   <p class="LetraTitulo">Bienvenido a la página de Inditex Tech</p>
   <hr class="PrimeraLinea">
-  <p class="TextoDesc">IndiTextch es una herramienta que permite identificar una prenda de ropa mediante unicamente una imagen. Inditex Tech es una herramienta que permite identificar una prenda de ropa mediante unicamente una imagen.IndiTextch es una herramienta que permite identificar una prenda de ropa mediante unicamente una imagen.IndiTextch es una herramienta que permite identificar una prenda de ropa mediante unicamente una imagen.</p>
+  <p class="TextoDesc">IndiTextch es una herramienta que permite identificar una prenda de ropa mediante unicamente una imagen. Entrando en detalles más técnicos, Inditex Tech se ha esforzado en crear una API que le permita al usuario identificar cualquier prenda de Zara unicamente con una fotografia. ¡Nunca habia sido más facil ir a la moda! Aprovecha las ventajas de esta herramienta.</p>
 
   <br>
   <hr class="SegundaLinea">
@@ -20,12 +20,23 @@
 
   <hr class="SegundaLinea">
   <p class="textoArrastrado">Sube tu imagen</p>
-
-  <section class="droparea">
+  
+  <section class="droparea" (click)="abrirSelector(inputArchivo)">
+    <input type="file" #inputArchivo accept="image/png, image/jpeg" style="display: none" (change)="archivoSeleccionado($event)">
     <i class="far fa-images"></i>
-    <img class="imagendroperea" src="https://www.pngplay.com/wp-content/uploads/8/Upload-Icon-Image-Free-PNG.png">
-    <p class="letradroperea">Arrastra la imagen aquí</p>
+    <img
+      class="imagendroperea"
+      src="https://www.pngplay.com/wp-content/uploads/8/Upload-Icon-Image-Free-PNG.png"
+      alt="Arrastra aquí"
+    />
+    <p class="letradroperea">Arrastra o sube tu imagen aqui</p>
   </section>
+
+
+  
+  
+  
+  
 
 </div>
 

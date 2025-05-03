@@ -45,9 +45,4 @@ export class ResultadoComponent {
     }
   ];
    */
-
-  getImageUrl(productId: string): string {
-    return `https://static.zara.net/photos/${productId}/image.jpg`; // Ejemplo base, ajusta al patrón real
-  }
-
 }
