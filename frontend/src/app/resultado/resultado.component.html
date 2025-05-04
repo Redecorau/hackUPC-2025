@@ -2,27 +2,46 @@
     <img class="ImagenBarra" routerLink="/InditextTech" src="https://2024.es.pycon.org/static/images/sponsors_logo/salvora/logo-inditex-tech.png?h=38f450e7">
   </div>
   
-  <div class="DebajoBarra">
-    <p class="titulocoincidencias" >Coincidencias encontradas:</p><br>
-
-
-    <div class="contenedoreS">
+  <
+    <div class="DebajoBarra">
+      <p class="titulocoincidencias" >Coincidencias encontradas:</p><br>
+  
       @let productos = productos$ | async;
-      @for (producto of productos; track producto.id){
+  
+      @if (productos?.length === 0) {
+        <p class="NohayTexto">No se han encontrado resultados</p>
 
-        <div class="contenedor">
-          <p class="Titulo">{{ producto.name }}</p>
-          <p class="Subtitulo">({{ producto.brand| titlecase }})</p>
-          @if (producto.price != undefined ){
-            <p class="precio">{{ producto.price.value.current}}€</p>
+  
+      } @else {
+        <div class="contenedoreS">
+          @for (producto of productos; track producto.id) {
+            <div class="contenedor">
+              <p class="Titulo">{{ producto.name }}</p>
+        
+              <img class="imagenNo" src="https://i.imgur.com/mt1Yerl.png" alt="Intento de imagen" />
+        
+              <p class="Subtitulo">({{ producto.brand | titlecase }})</p>
+        
+              @if (producto.price != undefined) {
+                <p class="precio">{{ producto.price.value.current }}€</p>
+              }
+              <a [href]="producto.link" target="_blank" class="boton-container">
+                <button class="botonabajo">Página de compra</button>
+              </a>
+            </div>
           }
-          <a [href]="producto.link" target="_blank">
-            <button class="botonabajo">Página de compra</button>
-          </a>
-          
         </div>
+        
       }
     </div>
+      
+      <ng-template #loading>
+        <p>Cargando imagen...</p>
+      </ng-template>
+      
+  
+  
+  
     
     <ng-template #loading>
       <p>Cargando imagen...</p>

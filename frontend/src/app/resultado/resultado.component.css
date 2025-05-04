@@ -10,6 +10,18 @@
     border-bottom: 2px solid black;      
 }
 
+.NohayTexto {
+    font-size: 20px;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.imagenNo {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    width: 110px;
+}
+
 .ImagenBarra {
     margin-left: 30px;
     cursor: pointer;
@@ -21,66 +33,102 @@
 }
 
 .contenedoreS {
-    gap: 15px;
+    gap: 20px;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
-    margin: 20px auto; 
+    margin: 20px auto;
     justify-content: center;
-    max-width: 1000px; 
-    margin-top: 0px;
-}
-
-.contenedor {
-
+    max-width: 1000px;
+  }
+  
+  .contenedor {
     border-radius: 20px;
     text-align: center;
-    background-color: #DBDBDB;
-    padding: 10px;
-}
-
-.Titulo {
-    font-size: 20px;
+    background-color: #dbdbdb;
+    padding: 15px;
+  
+    width: 220px;
+    height: 360px;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Titulo {
+    font-size: 18px;
     font-family: "Cal Sans", sans-serif;
-    word-wrap: break-word;
-    white-space: normal;
-    max-width: 200px;
+    max-width: 180px;
+    height: 48px;
+    margin: 0 auto;
     overflow: hidden;
-    text-align: center;    
-    margin: 0 auto;  
-}
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
 
-.Subtitulo {
-    margin-top: 2px;
-    font-size: 15px;
-    color: #636363;
-}
-
-.titulocoincidencias {
+  .titulocoincidencias {
     font-size: 40px;
     text-align: center;
     margin-top: 5px;
     font-family: "Cal Sans", sans-serif;
     margin-bottom: 0px;
 }
-
-.precio {
-    font-size: 20px;
+  
+  .imagenNo {
+    margin: 10px 0;
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+  }
+  
+  .Subtitulo {
+    font-size: 14px;
+    color: #636363;
+    margin: 5px 0;
+    height: 20px;
+  }
+  
+  .precio {
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 5px;
-}
+    margin: 5px 0;
+    height: 24px;
+  }
 
-.botonabajo {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a.boton-container {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  
+  
+  .boton-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .botonabajo {
     background-color: gray;
     color: white;
-    padding: 12px 24px;
+    padding: 10px 18px;
     border: none;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 13px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none; /* Elimina el subrayado */
   }
   
   .botonabajo:hover {
     background-color: rgb(160, 160, 160);
+    text-decoration: none; /* Asegúrate de que tampoco aparezca al pasar el cursor */
   }
