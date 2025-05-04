@@ -21,12 +21,19 @@
 }
 
 .contenedoreS {
+    gap: 15px;
     display: flex;
     flex-wrap: wrap;
     margin: 20px;
+    margin: 20px auto; 
+    justify-content: center;
+    max-width: 1000px; 
+    margin-top: 0px;
 }
 
 .contenedor {
+
+    border-radius: 20px;
     text-align: center;
     background-color: #DBDBDB;
     padding: 10px;
@@ -48,3 +55,32 @@
     font-size: 15px;
     color: #636363;
 }
+
+.titulocoincidencias {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 5px;
+    font-family: "Cal Sans", sans-serif;
+    margin-bottom: 0px;
+}
+
+.precio {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.botonabajo {
+    background-color: gray;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .botonabajo:hover {
+    background-color: rgb(160, 160, 160);
+  }

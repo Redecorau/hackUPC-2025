@@ -3,7 +3,7 @@
   </div>
   
   <div class="DebajoBarra">
-    <p>Coincidencias encontradas:</p><br>
+    <p class="titulocoincidencias" >Coincidencias encontradas:</p><br>
 
 
     <div class="contenedoreS">
@@ -14,10 +14,10 @@
           <p class="Titulo">{{ producto.name }}</p>
           <p class="Subtitulo">({{ producto.brand| titlecase }})</p>
           @if (producto.price != undefined ){
-            <p>{{ producto.price.value.current}}€</p>
+            <p class="precio">{{ producto.price.value.current}}€</p>
           }
           <a [href]="producto.link" target="_blank">
-            <button>Página de compra</button>
+            <button class="botonabajo">Página de compra</button>
           </a>
           
         </div>

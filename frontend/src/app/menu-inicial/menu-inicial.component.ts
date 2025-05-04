@@ -43,9 +43,9 @@ export class MenuInicialComponent implements OnInit {
         const url = await this.subirImagenACloudinary(fileArray[0]);
         if (url) {
           this.imagenUrl = url;
+          this.comunicacionService.actualizarVariable(this.imagenUrl); // ✅ esto faltaba
           console.log('Imagen cargada por drop:', this.imagenUrl);
-          
-          this.router.navigate(['/resultado'], { queryParams: { url: this.imagenUrl } });
+          this.router.navigate(['/Resultado'], { queryParams: { url: this.imagenUrl } });
         }
       }
     };
